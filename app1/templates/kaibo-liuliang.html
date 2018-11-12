@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+app.title = '多 X 轴示例';
+
+var colors = ['#000', '#FF0C07', '#000'];
+
+
+option = {
+    color: colors,
+    title: {
+        text: 'Blued开启直播 & Bingo开启直播',
+        left:'center',
+        top:35,
+        textStyle:{
+            fontSize:30,
+
+        },
+
+
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+       legend:{
+        data:['bingo','blued','blued开播使用流量','bingo开播使用流量'],
+        bottom: 87,
+        textStyle:{
+            fontSize:17,
+
+        },
+    },
+
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        top:100,
+        left: 30,
+        right: 80,
+        bottom: 160,
+        containLabel: true
+    },
+    xAxis:
+
+        {
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: colors[1],
+                    width:3
+                }
+            },
+
+        data: ['1min','2min','3min','4min','5min','6min','7min','8min','9min','10min','11min','12min','13min','14min','15min','16min','17min','18min','19min','20min','21min','22min','23min','24min','25min','26min','27min','28min','29min','30min','31min','32min','33min','34min','35min','36min','37min','38min','39min','40min']
+        }
+    ,
+    yAxis: [
+        {
+            type: 'value',
+            show: true,
+            name:"开播流量",
+            axisLine: {
+            lineStyle: {
+            width: 3// 粗细
+        }
+    },
+                  label: {
+                    formatter: function (params) {
+                        console.log(params)
+                        return  params.seriesData[0].seriesName+ params.value
+                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                    }
+                }
+            },
+
+    ],
+    series: [
+        {
+            name: 'blued',
+            type: 'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [81044999, 81525863, 82032083, 82553959, 83023657, 83424259, 83857299, 84308775, 84762690, 85220588, 85669634, 86146269, 86616735, 87091705, 87548701, 88023001, 88486210, 88957612, 89399810, 89862297, 90320398, 90800352, 91336117, 91882317, 92331063, 92814126, 93283132, 93750729, 94170512, 94616276, 95084172, 95562568, 96015787, 96518988, 96975243, 97451543, 97865907, 98345088, 98783077, 99246187]
+        },
+        {
+            name:'blued开播使用流量',
+            color:'#42ff2e',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            itemStyle: {
+        normal: {
+            borderColor: '#42ff2e',
+            borderWidth: 10,
+        }
+      },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [18201188],
+        },
+        {
+            name:'bingo',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            smooth: true,
+            data:[178969690, 179109214, 179238148, 179374018, 179510635, 179667887, 179808760, 179913776, 180019199, 180176025, 180301673, 180426464, 180546053, 180658456, 180785896, 180897015, 181020800, 181131373, 181243985, 181390895, 181536389, 181660729, 181787471, 181914917, 182057857, 182184433, 182305981, 182418468, 182537337, 182692009, 182799224, 182922957, 183042857, 183159024, 183300549, 183424343, 183544924, 183661149, 183782465, 183920036]
+        },
+        {
+            name:'bingo开播使用流量',
+            color:'#27a5ff',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            itemStyle: {
+        normal: {
+            borderColor: '#27a5ff',
+            borderWidth: 10,
+        }
+      },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [4950346],
+        },
+    ]
+};
+
+
+
+
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+       </script>
+   </body>
+</html>

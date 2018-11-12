@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+app.title = '多 X 轴示例';
+
+var colors = ['#000', '#FF0C07', '#000'];
+
+
+option = {
+    color: colors,
+    title: {
+        text: 'Blued启动 & Grindr启动',
+        left:'center',
+        top:35,
+        textStyle:{
+            fontSize:30,
+
+        },
+
+
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+       legend:{
+        data:['bingo热启动','blued热启动','bingo冷启动','blued冷启动'],
+        bottom: 87,
+        textStyle:{
+            fontSize:17,
+
+        },
+    },
+
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        top:100,
+        left: 30,
+        right: 80,
+        bottom: 160,
+        containLabel: true
+    },
+    xAxis:
+
+        {
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: colors[1],
+                    width:3
+                }
+            },
+            data: [1,2,3,4,5,6,7,8,9,10],
+        }
+    ,
+    yAxis: [
+        {
+            type: 'value',
+            show: true,
+            name:"启动时间",
+            axisLine: {
+            lineStyle: {
+            width: 3// 粗细
+        }
+    },
+                  label: {
+                    formatter: function (params) {
+                        console.log(params)
+                        return  params.seriesData[0].seriesName+ params.value
+                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                    }
+                }
+            },
+
+    ],
+    series: [
+        {
+            name:'bingo冷启动',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [625, 617, 580, 620, 613, 666, 620, 658, 632, 632],
+        },
+        {
+            name: 'blued冷启动',
+            type: 'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            smooth: true,
+            data: [915, 901, 937, 910, 958, 898, 917, 946, 941, 930],
+        },
+        {
+            name:'blued热启动',
+            color:'#42ff2e',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            itemStyle: {
+        normal: {
+            borderColor: '#42ff2e',
+            borderWidth: 10,
+        }
+      },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [139],
+        },
+        {
+            name:'bingo热启动',
+            color:'#27a5ff',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            itemStyle: {
+        normal: {
+            borderColor: '#27a5ff',
+            borderWidth: 10,
+        }
+      },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [110],
+        },
+
+
+    ]
+};
+
+
+
+
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+       </script>
+   </body>
+</html>

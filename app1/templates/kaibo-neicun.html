@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+app.title = '多 X 轴示例';
+
+var colors = ['#000', '#FF0C07', '#000'];
+
+
+option = {
+    color: colors,
+    title: {
+        text: 'Blued开启直播 & Bingo开启直播',
+        left:'center',
+        top:35,
+        textStyle:{
+            fontSize:30,
+
+        },
+
+
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+       legend:{
+        data:['bingo','blued'],
+        bottom: 87,
+        textStyle:{
+            fontSize:17,
+
+        },
+    },
+
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        top:100,
+        left: 30,
+        right: 80,
+        bottom: 160,
+        containLabel: true
+    },
+    xAxis:
+
+        {
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: colors[1],
+                    width:3
+                }
+            },
+
+        data: ['1min','2min','3min','4min','5min','6min','7min','8min','9min','10min','11min','12min','13min','14min','15min','16min','17min','18min','19min','20min']
+        }
+    ,
+    yAxis: [
+        {
+            type: 'value',
+            show: true,
+            name:"内存",
+            axisLine: {
+            lineStyle: {
+            width: 3// 粗细
+        }
+    },
+                  label: {
+                    formatter: function (params) {
+                        console.log(params)
+                        return  params.seriesData[0].seriesName+ params.value
+                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                    }
+                }
+            },
+
+    ],
+    series: [
+        {
+            name:'bingo',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            xAxisIndex: 0,
+            smooth: true,
+            data: [475324, 464786, 463057, 457007, 459784, 465343, 470005, 467666, 460770, 459761, 463050, 461554, 454097, 483620, 460233, 459862, 461910, 463259, 463390, 464761]
+        },
+        {
+            name:'blued',
+            type:'line',
+            lineStyle: {
+                width: 3.5//default value:2
+            },
+            smooth: true,
+            data: [370374, 377840, 379555, 366109, 366046, 368090, 367962, 367640, 368081, 369559, 368620, 368797, 370359, 370048, 369624, 369591, 370436, 369581, 354748, 370185]
+        }
+    ]
+};
+
+
+
+
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+       </script>
+   </body>
+</html>
